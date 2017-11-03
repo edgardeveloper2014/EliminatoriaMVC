@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="partidoDBModelStoreContainer" CdmEntityContainer="partidoDBEntities1">
+    <EntitySetMapping Name="detalle">
+      <EntityTypeMapping TypeName="partidoDBModel.detalle">
+        <MappingFragment StoreEntitySet="detalle">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="fkIdFecha" ColumnName="fkIdFecha" />
+          <ScalarProperty Name="goles1" ColumnName="goles1" />
+          <ScalarProperty Name="goles2" ColumnName="goles2" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="equipo">
+      <EntityTypeMapping TypeName="partidoDBModel.equipo">
+        <MappingFragment StoreEntitySet="equipo">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="puntos" ColumnName="puntos" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fecha">
+      <EntityTypeMapping TypeName="partidoDBModel.fecha">
+        <MappingFragment StoreEntitySet="fecha">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="fecha1" ColumnName="fecha" />
+          <ScalarProperty Name="fkIdE1" ColumnName="fkIdE1" />
+          <ScalarProperty Name="fkIdE2" ColumnName="fkIdE2" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="partidoDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="detalle">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fkIdFecha" Type="int" />
+          <Property Name="goles1" Type="int" />
+          <Property Name="goles2" Type="int" />
+        </EntityType>
+        <EntityType Name="equipo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="40" />
+          <Property Name="puntos" Type="int" />
+        </EntityType>
+        <EntityType Name="fecha">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha" Type="datetime" />
+          <Property Name="fkIdE1" Type="int" />
+          <Property Name="fkIdE2" Type="int" />
+        </EntityType>
+        <Association Name="FK__detalle__fkIdFec__33D4B598">
+          <End Role="fecha" Type="Self.fecha" Multiplicity="0..1" />
+          <End Role="detalle" Type="Self.detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fecha">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="detalle">
+              <PropertyRef Name="fkIdFecha" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__fecha__fkIdE1__300424B4">
+          <End Role="equipo" Type="Self.equipo" Multiplicity="0..1" />
+          <End Role="fecha" Type="Self.fecha" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fecha">
+              <PropertyRef Name="fkIdE1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__fecha__fkIdE2__30F848ED">
+          <End Role="equipo" Type="Self.equipo" Multiplicity="0..1" />
+          <End Role="fecha" Type="Self.fecha" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fecha">
+              <PropertyRef Name="fkIdE2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="partidoDBModelStoreContainer">
+          <EntitySet Name="detalle" EntityType="Self.detalle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="equipo" EntityType="Self.equipo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fecha" EntityType="Self.fecha" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__detalle__fkIdFec__33D4B598" Association="Self.FK__detalle__fkIdFec__33D4B598">
+            <End Role="fecha" EntitySet="fecha" />
+            <End Role="detalle" EntitySet="detalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__fecha__fkIdE1__300424B4" Association="Self.FK__fecha__fkIdE1__300424B4">
+            <End Role="equipo" EntitySet="equipo" />
+            <End Role="fecha" EntitySet="fecha" />
+          </AssociationSet>
+          <AssociationSet Name="FK__fecha__fkIdE2__30F848ED" Association="Self.FK__fecha__fkIdE2__30F848ED">
+            <End Role="equipo" EntitySet="equipo" />
+            <End Role="fecha" EntitySet="fecha" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="partidoDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="detalle">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fkIdFecha" Type="Int32" />
+          <Property Name="goles1" Type="Int32" />
+          <Property Name="goles2" Type="Int32" />
+          <NavigationProperty Name="fecha" Relationship="Self.FK__detalle__fkIdFec__33D4B598" FromRole="detalle" ToRole="fecha" />
+        </EntityType>
+        <EntityType Name="equipo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="puntos" Type="Int32" />
+          <NavigationProperty Name="fecha" Relationship="Self.FK__fecha__fkIdE1__300424B4" FromRole="equipo" ToRole="fecha" />
+          <NavigationProperty Name="fecha1" Relationship="Self.FK__fecha__fkIdE2__30F848ED" FromRole="equipo" ToRole="fecha" />
+        </EntityType>
+        <EntityType Name="fecha">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha1" Type="DateTime" Precision="3" />
+          <Property Name="fkIdE1" Type="Int32" />
+          <Property Name="fkIdE2" Type="Int32" />
+          <NavigationProperty Name="detalle" Relationship="Self.FK__detalle__fkIdFec__33D4B598" FromRole="fecha" ToRole="detalle" />
+          <NavigationProperty Name="equipo" Relationship="Self.FK__fecha__fkIdE1__300424B4" FromRole="fecha" ToRole="equipo" />
+          <NavigationProperty Name="equipo1" Relationship="Self.FK__fecha__fkIdE2__30F848ED" FromRole="fecha" ToRole="equipo" />
+        </EntityType>
+        <Association Name="FK__detalle__fkIdFec__33D4B598">
+          <End Role="fecha" Type="Self.fecha" Multiplicity="0..1" />
+          <End Role="detalle" Type="Self.detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fecha">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="detalle">
+              <PropertyRef Name="fkIdFecha" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__fecha__fkIdE1__300424B4">
+          <End Role="equipo" Type="partidoDBModel.equipo" Multiplicity="0..1" />
+          <End Role="fecha" Type="Self.fecha" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fecha">
+              <PropertyRef Name="fkIdE1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__fecha__fkIdE2__30F848ED">
+          <End Role="equipo" Type="partidoDBModel.equipo" Multiplicity="0..1" />
+          <End Role="fecha" Type="Self.fecha" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fecha">
+              <PropertyRef Name="fkIdE2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="partidoDBEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="detalle" EntityType="Self.detalle" />
+          <EntitySet Name="equipo" EntityType="partidoDBModel.equipo" />
+          <EntitySet Name="fecha" EntityType="Self.fecha" />
+          <AssociationSet Name="FK__detalle__fkIdFec__33D4B598" Association="Self.FK__detalle__fkIdFec__33D4B598">
+            <End Role="fecha" EntitySet="fecha" />
+            <End Role="detalle" EntitySet="detalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__fecha__fkIdE1__300424B4" Association="Self.FK__fecha__fkIdE1__300424B4">
+            <End Role="equipo" EntitySet="equipo" />
+            <End Role="fecha" EntitySet="fecha" />
+          </AssociationSet>
+          <AssociationSet Name="FK__fecha__fkIdE2__30F848ED" Association="Self.FK__fecha__fkIdE2__30F848ED">
+            <End Role="equipo" EntitySet="equipo" />
+            <End Role="fecha" EntitySet="fecha" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="partidoDBModelStoreContainer" CdmEntityContainer="partidoDBEntities1">
+          <EntitySetMapping Name="detalle">
+            <EntityTypeMapping TypeName="partidoDBModel.detalle">
+              <MappingFragment StoreEntitySet="detalle">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fkIdFecha" ColumnName="fkIdFecha" />
+                <ScalarProperty Name="goles1" ColumnName="goles1" />
+                <ScalarProperty Name="goles2" ColumnName="goles2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="equipo">
+            <EntityTypeMapping TypeName="partidoDBModel.equipo">
+              <MappingFragment StoreEntitySet="equipo">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="puntos" ColumnName="puntos" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fecha">
+            <EntityTypeMapping TypeName="partidoDBModel.fecha">
+              <MappingFragment StoreEntitySet="fecha">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fecha1" ColumnName="fecha" />
+                <ScalarProperty Name="fkIdE1" ColumnName="fkIdE1" />
+                <ScalarProperty Name="fkIdE2" ColumnName="fkIdE2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,26 @@
+﻿@model  IEnumerable<Eliminatoria.Models.equipo>
+
+@{
+    ViewBag.Title = "View";
+}
+<h2 class="label label-primary">Listado de Equipos</h2>
+<table class="table">
+    <tr>
+        <th>Equipo</th>
+        <th>Puntos</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.puntos)
+            </td>
+        </tr>
+    }
+</table>
+
+
+

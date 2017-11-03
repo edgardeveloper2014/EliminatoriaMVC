@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="partidoDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="detalle">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fkIdFecha" Type="Int32" />
+    <Property Name="goles1" Type="Int32" />
+    <Property Name="goles2" Type="Int32" />
+    <NavigationProperty Name="fecha" Relationship="Self.FK__detalle__fkIdFec__33D4B598" FromRole="detalle" ToRole="fecha" />
+  </EntityType>
+  <EntityType Name="equipo">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="puntos" Type="Int32" />
+    <NavigationProperty Name="fecha" Relationship="Self.FK__fecha__fkIdE1__300424B4" FromRole="equipo" ToRole="fecha" />
+    <NavigationProperty Name="fecha1" Relationship="Self.FK__fecha__fkIdE2__30F848ED" FromRole="equipo" ToRole="fecha" />
+  </EntityType>
+  <EntityType Name="fecha">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fecha1" Type="DateTime" Precision="3" />
+    <Property Name="fkIdE1" Type="Int32" />
+    <Property Name="fkIdE2" Type="Int32" />
+    <NavigationProperty Name="detalle" Relationship="Self.FK__detalle__fkIdFec__33D4B598" FromRole="fecha" ToRole="detalle" />
+    <NavigationProperty Name="equipo" Relationship="Self.FK__fecha__fkIdE1__300424B4" FromRole="fecha" ToRole="equipo" />
+    <NavigationProperty Name="equipo1" Relationship="Self.FK__fecha__fkIdE2__30F848ED" FromRole="fecha" ToRole="equipo" />
+  </EntityType>
+  <Association Name="FK__detalle__fkIdFec__33D4B598">
+    <End Role="fecha" Type="Self.fecha" Multiplicity="0..1" />
+    <End Role="detalle" Type="Self.detalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fecha">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="detalle">
+        <PropertyRef Name="fkIdFecha" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__fecha__fkIdE1__300424B4">
+    <End Role="equipo" Type="partidoDBModel.equipo" Multiplicity="0..1" />
+    <End Role="fecha" Type="Self.fecha" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="equipo">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="fecha">
+        <PropertyRef Name="fkIdE1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__fecha__fkIdE2__30F848ED">
+    <End Role="equipo" Type="partidoDBModel.equipo" Multiplicity="0..1" />
+    <End Role="fecha" Type="Self.fecha" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="equipo">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="fecha">
+        <PropertyRef Name="fkIdE2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="partidoDBEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="detalle" EntityType="Self.detalle" />
+    <EntitySet Name="equipo" EntityType="partidoDBModel.equipo" />
+    <EntitySet Name="fecha" EntityType="Self.fecha" />
+    <AssociationSet Name="FK__detalle__fkIdFec__33D4B598" Association="Self.FK__detalle__fkIdFec__33D4B598">
+      <End Role="fecha" EntitySet="fecha" />
+      <End Role="detalle" EntitySet="detalle" />
+    </AssociationSet>
+    <AssociationSet Name="FK__fecha__fkIdE1__300424B4" Association="Self.FK__fecha__fkIdE1__300424B4">
+      <End Role="equipo" EntitySet="equipo" />
+      <End Role="fecha" EntitySet="fecha" />
+    </AssociationSet>
+    <AssociationSet Name="FK__fecha__fkIdE2__30F848ED" Association="Self.FK__fecha__fkIdE2__30F848ED">
+      <End Role="equipo" EntitySet="equipo" />
+      <End Role="fecha" EntitySet="fecha" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
