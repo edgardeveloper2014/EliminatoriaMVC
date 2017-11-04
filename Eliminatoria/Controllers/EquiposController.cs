@@ -41,9 +41,28 @@ namespace Eliminatoria.Controllers
             {
                 db.fecha.Add(objfecha);
                 db.SaveChanges();
-                return RedirectToAction("registro");
+                return RedirectToAction("detalle");
             }
             return View(objfecha);
+        }
+        public ActionResult detalle()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult registroDetalle(detalle objdetalle)
+        {
+
+            if (ModelState.IsValid)
+            {
+                db.detalle.Add(objdetalle);
+                db.SaveChanges();
+                return RedirectToAction("registro");
+            }
+            return View(objdetalle);
         }
     }
 }
