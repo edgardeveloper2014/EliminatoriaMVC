@@ -27,5 +27,23 @@ namespace Eliminatoria.Controllers
             }
             return View(objequipo);
         }
+
+        public ActionResult fecha() {
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult registroFecha(fecha objfecha) {
+
+            if (ModelState.IsValid)
+            {
+                db.fecha.Add(objfecha);
+                db.SaveChanges();
+                return RedirectToAction("registro");
+            }
+            return View(objfecha);
+        }
     }
 }
